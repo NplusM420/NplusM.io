@@ -1,0 +1,201 @@
+.aboutContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #0a192f;
+  color: #8892b0;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 3rem);
+  color: #64ffda;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #8892b0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.bio {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.profileImage {
+  width: clamp(150px, 30vw, 200px);
+  height: clamp(150px, 30vw, 200px);
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+}
+
+.bioText {
+  flex: 1;
+}
+
+.bioText h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: #ccd6f6;
+  margin-bottom: 1rem;
+}
+
+.bioText p {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
+}
+
+.skills h2, .timeline h2 {
+  font-size: clamp(1.8rem, 3vw, 2rem);
+  color: #ccd6f6;
+  margin-bottom: 1.5rem;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1.5rem;
+}
+
+.skillItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.skillItem svg {
+  width: clamp(60px, 10vw, 80px);
+  height: clamp(60px, 10vw, 80px);
+}
+
+.skillName {
+  margin-top: 0.5rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  color: #ccd6f6;
+}
+
+.timelineContent {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timelineContent::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #64ffda;
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.timelineMarker {
+  position: absolute;
+  left: -2.4rem;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #64ffda;
+  border: 4px solid #0a192f;
+}
+
+.timelineInfo {
+  background-color: #172a45;
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timelineYear {
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  color: #64ffda;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.timelineInfo h3 {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #ccd6f6;
+  margin-bottom: 0.5rem;
+}
+
+.timelineInfo p {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: #8892b0;
+}
+
+.timelineLink {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #64ffda;
+  text-decoration: none;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  transition: color 0.3s ease;
+}
+
+.timelineLink:hover {
+  color: #4fd1c5;
+}
+
+@media (max-width: 768px) {
+  .aboutContainer {
+    padding: 1rem;
+  }
+
+  .bio {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profileImage {
+    margin-bottom: 1rem;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timelineContent {
+    padding-left: 1.5rem;
+  }
+
+  .timelineMarker {
+    left: -1.9rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .skillsGrid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timelineContent::before,
+  .timelineMarker {
+    transition: none;
+  }
+}

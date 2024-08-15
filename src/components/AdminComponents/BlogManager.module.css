@@ -1,0 +1,78 @@
+.blogManager {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.error {
+  color: #ff6b6b;
+  margin-bottom: 1rem 0;
+}
+
+.postGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.postCard {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #233554;
+  border: 1px solid #64ffda;
+  color: #ccd6f6;
+}
+
+.textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.button {
+  background-color: #64ffda;
+  color: #0a192f;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #4fd1c5;
+}
+
+.postImage {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.newPostForm {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .postGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.loading {
+  text-align: center;
+  color: #64ffda;
+  margin: 1rem 0;
+}

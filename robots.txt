@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nplusm.io/sitemap.xml
+
+Disallow: /admin
+Disallow: /login

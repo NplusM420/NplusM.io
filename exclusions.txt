@@ -1,0 +1,4 @@
+node_modules
+.elasticbeanstalk
+.git
+__pycache__

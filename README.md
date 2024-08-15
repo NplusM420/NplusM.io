@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# NplusM.IO - Personal Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+NplusM.IO is a modern, responsive personal portfolio website built with React for the frontend and Flask for the backend. It showcases projects, skills, and blog posts in an interactive and visually appealing manner. The site includes an admin dashboard for easy content management.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Interactive 3D visualization of skills on the homepage
+- Responsive design for optimal viewing on all devices
+- Dynamic project showcase with filtering capabilities
+- Blog section for sharing thoughts and experiences
+- Timeline view of professional journey
+- Contact form for easy communication
+- Admin dashboard for managing projects, skills, and blog posts
+- Dark theme with consistent styling across all pages
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Frontend
+- React.js
+- React Router for navigation
+- Framer Motion for animations
+- Three.js for 3D visualizations
+- Axios for API requests
+- CSS Modules for styling
 
-### `npm test`
+### Backend
+- Flask (Python)
+- SQLAlchemy for database management
+- Flask-JWT-Extended for authentication
+- Flask-Bcrypt for password hashing
+- Flask-CORS for handling Cross-Origin Resource Sharing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Database
+- PostgreSQL
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
+git clone https://github.com/yourusername/nplusm-web.git
+cd nplusm-web
+Copy
+2. Install frontend dependencies:
+cd frontend
+npm install
+Copy
+3. Install backend dependencies:
+cd ../backend
+pip install -r requirements.txt
+Copy
+4. Set up the database:
+- Create a PostgreSQL database
+- Update the `DATABASE_URL` in the `.env` file
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. Set up environment variables:
+- Create a `.env` file in the backend directory
+- Add the following variables:
+  ```
+  DATABASE_URL=postgresql://username:password@localhost/database_name
+  JWT_SECRET_KEY=your_secret_key
+  ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running the Application
 
-### `npm run eject`
+1. Start the backend server:
+cd backend
+python app.py
+Copy
+2. In a new terminal, start the frontend development server:
+cd frontend
+npm start
+Copy
+3. Open your browser and navigate to `http://localhost:3000`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Admin Dashboard
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To access the admin dashboard:
+1. Navigate to `/login`
+2. Enter your admin credentials
+3. You will be redirected to the admin dashboard at `/admin`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Deployment
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Frontend
+1. Build the React app:
+cd frontend
+npm run build
+Deploy the contents of the `build` folder to your web server
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Backend
+1. Set up a production-ready WSGI server like Gunicorn
+2. Configure your web server (e.g., Nginx) to proxy requests to the WSGI server
+3. Ensure all environment variables are set in your production environment

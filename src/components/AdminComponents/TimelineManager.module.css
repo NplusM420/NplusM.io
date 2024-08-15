@@ -1,0 +1,77 @@
+.timelineManager {
+  padding: 20px;
+}
+
+.loading {
+  text-align: center;
+  color: #64ffda;
+  margin: 1rem 0;
+}
+
+.error {
+  color: #ff6b6b;
+  margin: 1rem 0;
+}
+
+.timelineGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.timelineCard {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #233554;
+  border: 1px solid #64ffda;
+  color: #ccd6f6;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.button {
+  background-color: #64ffda;
+  color: #0a192f;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #4fd1c5;
+}
+
+.newEventForm {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.newEventForm .textarea {
+  grid-column: span 2;
+}
+
+.newEventForm .button {
+  grid-column: span 2;
+}
+
+.loading {
+  text-align: center;
+  color: #64ffda;
+  margin: 1rem 0;
+}

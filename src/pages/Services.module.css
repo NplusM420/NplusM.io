@@ -1,0 +1,160 @@
+.servicesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #0a192f;
+  color: #8892b0;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 3rem);
+  color: #64ffda;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #8892b0;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.serviceCard {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.serviceCard.active {
+  background-color: #1f4068;
+}
+
+.serviceImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.serviceIcon {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.serviceTitle {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  color: #ccd6f6;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.serviceDescription {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.serviceFeatures {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.serviceFeature {
+  font-size: clamp(0.8rem, 1.4vw, 0.9rem);
+  margin-bottom: 0.5rem;
+  color: #64ffda;
+}
+
+.serviceFeature::before {
+  content: "• ";
+  color: #64ffda;
+}
+
+.ctaSection {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.ctaText {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #ccd6f6;
+  margin-bottom: 1rem;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: #0a192f;
+  background-color: #64ffda;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.ctaButton:hover {
+  background-color: #4fd1c5;
+  transform: translateY(-2px);
+}
+
+.loading {
+  text-align: center;
+  color: #64ffda;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-top: 2rem;
+}
+
+.error {
+  text-align: center;
+  color: #ff6b6b;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .servicesContainer {
+    padding: 1rem;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .servicesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .serviceCard,
+  .ctaButton {
+    transition: none;
+  }
+
+  .serviceCard:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,23 @@
+programming_languages:
+  - name: JavaScript
+    level: 90
+  - name: Python
+    level: 85
+
+frameworks:
+  - name: React
+    level: 88
+  - name: Flask
+    level: 80
+
+tools:
+  - name: Git
+    level: 85
+  - name: Docker
+    level: 75
+
+soft_skills:
+  - name: Problem Solving
+    level: 90
+  - name: Communication
+    level: 85
