@@ -7,17 +7,8 @@ __pycache__/
 venv/
 env/
 .env
-
-# Elastic Beanstalk Files (you can remove these if not using Elastic Beanstalk)
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
-
 # Node modules
 node_modules/
-
-# React build
-build/
 
 # IDE files
 .vscode/
