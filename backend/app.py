@@ -3,7 +3,7 @@ import sys
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate 
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from flask_mail import Mail, Message
@@ -11,6 +11,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import json
 import logging
+from sqlalchemy.exc import SQLAlchemyError
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -18,7 +19,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__) 
+app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'your-secret-key')
@@ -39,7 +40,7 @@ if not app.config['JWT_SECRET_KEY']:
 
 CORS(app, resources={r"/api/*": {"origins": os.environ.get('ALLOWED_ORIGINS', '*').split(',')}})
 db = SQLAlchemy(app)
-migrate = Migrate(app, db) 
+# migrate = Migrate(app, db)  # Comment out - we'll create tables directly 
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 mail = Mail(app)
@@ -185,61 +186,79 @@ class AdminProfile(db.Model):
         }
 
 # Routes
-
-
-
 @app.route('/')
 def home():
+    logger.info("Request: GET /")
     return "Welcome to NplusM.IO!"
+
 @app.route('/api/login', methods=['POST'])
 def login():
+    logger.info(f"Request: {request.method} {request.path}")
     username = request.json.get('username', None)
     password = request.json.get('password', None)
-    if username == os.getenv('ADMIN_USERNAME') and password == os.getenv('ADMIN_PASSWORD'):
+
+    # Retrieve admin credentials from environment variables
+    admin_username = os.environ.get("ADMIN_USERNAME")
+    admin_password = os.environ.get("ADMIN_PASSWORD")
+
+    if username == admin_username and password == admin_password:
         access_token = create_access_token(identity=username, expires_delta=timedelta(hours=1))
         return jsonify(access_token=access_token), 200
     return jsonify({"msg": "Bad username or password"}), 401
 
 @app.route('/api/projects', methods=['GET', 'POST'])
 def handle_projects():
+    logger.info(f"Request: {request.method} {request.path}")
     if request.method == 'GET':
         featured = request.args.get('featured', '').lower() == 'true'
         current = request.args.get('current', '').lower() == 'true'
-        
+
         app.logger.info(f"Fetching projects. Featured: {featured}, Current: {current}")
-        
-        query = Project.query
-        if featured:
-            query = query.filter_by(is_featured=True)
-        if current:
-            query = query.filter_by(is_current=True)
-        
-        projects = query.all()
-        project_data = [project.to_dict() for project in projects]
-        
-        app.logger.info(f"Sending {len(project_data)} projects")
-        app.logger.debug(f"Project data: {project_data}")
-        
-        return jsonify(project_data)
-    
+
+        try:
+            query = Project.query
+            if featured:
+                query = query.filter_by(is_featured=True)
+            if current:
+                query = query.filter_by(is_current=True)
+
+            projects = query.all()
+            project_data = [project.to_dict() for project in projects]
+
+            app.logger.info(f"Sending {len(project_data)} projects")
+            app.logger.debug(f"Project data: {project_data}")
+
+            return jsonify(project_data)
+        except SQLAlchemyError as e:
+            logger.error(f"Database error: {str(e)}")
+            db.session.rollback()
+            return jsonify({"error": "Database error"}), 500
+
     elif request.method == 'POST':
         data = request.json
         app.logger.info(f"Received new project data: {data}")
-        
+
         try:
             new_project = Project(**data)
             db.session.add(new_project)
             db.session.commit()
             app.logger.info(f"Created new project with ID: {new_project.id}")
             return jsonify(new_project.to_dict()), 201
-        except Exception as e:
-            app.logger.error(f"Error creating new project: {str(e)}")
+        except SQLAlchemyError as e:
+            logger.error(f"Database error: {str(e)}")
             db.session.rollback()
             return jsonify({"error": "Failed to create project"}), 500
 
 @app.route('/api/projects/<int:project_id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_project(project_id):
-    project = Project.query.get_or_404(project_id)
+    logger.info(f"Request: {request.method} {request.path}")
+    try:
+        project = Project.query.get_or_404(project_id)
+    except SQLAlchemyError as e:
+        logger.error(f"Database error: {str(e)}")
+        db.session.rollback()
+        return jsonify({"error": "Database error"}), 500
+
     if request.method == 'GET':
         return jsonify(project.to_dict())
     elif request.method == 'PUT':
@@ -550,5 +569,5 @@ def serve(path):
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        db.create_all()  # Create tables directly
     app.run(debug=False)
