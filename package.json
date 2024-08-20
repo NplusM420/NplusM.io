@@ -7,8 +7,8 @@
     "npm": "9.x"
   },
   "scripts": {
-    "start": "node backend/app.js",
-    "heroku-postbuild": "cd frontend && npm install --legacy-peer-deps && npm run build"
-  },
+  "start": "node backend/app.js",
+  "heroku-postbuild": "cd frontend && ls && cat package.json && npm install --legacy-peer-deps && npm run build"
+},
   "cacheDirectories": ["frontend/node_modules"]
 }
