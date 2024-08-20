@@ -3,7 +3,7 @@ import sys
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate 
+from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from flask_mail import Mail, Message
@@ -12,12 +12,9 @@ from datetime import datetime, timedelta
 import json
 import logging
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy import create_engine 
+from sqlalchemy import create_engine
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-db = None  # Declare db globally, initially set to None
-migrate = None # Declare migrate globally, initially set to None
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -42,6 +39,9 @@ app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
 if not app.config['JWT_SECRET_KEY']:
     raise ValueError("No JWT_SECRET_KEY set for application")
 
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
 CORS(app, resources={r"/api/*": {"origins": os.environ.get('ALLOWED_ORIGINS', '*').split(',')}})
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
@@ -54,16 +54,6 @@ os.makedirs(app.config['PROJECT_UPLOAD_FOLDER'], exist_ok=True)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
- 
-def init_db():
-    global db, migrate 
-    db = SQLAlchemy(app)
-    migrate = Migrate(app, db)
-    with app.app_context():
-        db.create_all()
-    return db, migrate
-
-db, migrate = init_db()
 
 # Models
 
