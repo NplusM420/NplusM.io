@@ -27,3 +27,5 @@ Thumbs.db
 # Sensitive information
 *config.json
 *secrets.json
+
+*Website-Info.md 
