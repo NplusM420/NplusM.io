@@ -21,7 +21,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__, static_folder='frontend/build', static_url_path='/') 
+app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = f"postgresql+psycopg2://{os.environ.get('DATABASE_URL').split('://')[1]}"
