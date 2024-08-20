@@ -55,6 +55,16 @@ os.makedirs(app.config['PROJECT_UPLOAD_FOLDER'], exist_ok=True)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
  
+def init_db():
+    global db, migrate 
+    db = SQLAlchemy(app)
+    migrate = Migrate(app, db)
+    with app.app_context():
+        db.create_all()
+    return db, migrate
+
+db, migrate = init_db()
+
 # Models
 
 class Project(db.Model):
@@ -569,16 +579,6 @@ def serve(path):
     else:
         return send_from_directory(app.static_folder, 'index.html')
 
-def init_db():
-    db = SQLAlchemy(app)
-    migrate = Migrate(app, db)
-    with app.app_context():
-        db.create_all()
-    return db, migrate 
-
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
-
-    # --- Initialize the database AFTER the app starts ---
-    db, migrate = init_db()
