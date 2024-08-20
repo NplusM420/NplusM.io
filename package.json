@@ -6,60 +6,20 @@
     "node": "20.x",
     "npm": "9.x"
   },
+  "scripts": {
+    "start": "node backend/server.js",
+    "heroku-postbuild": "cd frontend && npm install && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon backend/server.js",
+    "client": "cd frontend && npm start"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^6.4.8",
-    "@testing-library/react": "^16.0.0",
-    "@testing-library/user-event": "^14.5.2",
-    "@types/three": "^0.166.0",
-    "axios": "^1.7.4",
-    "framer-motion": "^11.3.28",
-    "gsap": "^3.12.5",
-    "jwt-decode": "^4.0.0",
-    "react": "^18.3.1",
-    "react-circular-progressbar": "^2.1.0",
-    "react-dom": "^18.3.1",
-    "react-helmet": "^6.1.0",
-    "react-icons": "^5.3.0",
-    "react-markdown": "^9.0.1",
-    "react-router-dom": "^6.26.1",
-    "react-scripts": "5.0.1",
-    "three": "^0.166.1",
-    "web-vitals": "^4.2.3",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "express": "^4.17.1",
     "pg": "^8.7.1",
     "dotenv": "^10.0.0"
   },
-  "scripts": {
-    "start": "node backend/app.js",
-    "heroku-postbuild": "npm install && cd frontend && npm install && npm run build",
-    "build": "cd frontend && react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
-    "nodemon": "^2.0.12"
-  },
-  "cacheDirectories": [
-    "node_modules",
-    "frontend/node_modules"
-  ]
+    "nodemon": "^2.0.12",
+    "concurrently": "^6.2.0"
+  }
 }

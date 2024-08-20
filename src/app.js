@@ -22,8 +22,6 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-<Route path="/login" element={<Login />} />
-
 function App() {
   return (
     <Router>
