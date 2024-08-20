@@ -12,8 +12,12 @@ from datetime import datetime, timedelta
 import json
 import logging
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import create_engine 
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+db = None  # Declare db globally, initially set to None
+migrate = None # Declare migrate globally, initially set to None
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -39,8 +43,6 @@ if not app.config['JWT_SECRET_KEY']:
     raise ValueError("No JWT_SECRET_KEY set for application")
 
 CORS(app, resources={r"/api/*": {"origins": os.environ.get('ALLOWED_ORIGINS', '*').split(',')}})
-db = SQLAlchemy(app)
-# migrate = Migrate(app, db)  # Comment out - we'll create tables directly 
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 mail = Mail(app)
@@ -52,7 +54,7 @@ os.makedirs(app.config['PROJECT_UPLOAD_FOLDER'], exist_ok=True)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
+ 
 # Models
 
 class Project(db.Model):
@@ -567,6 +569,16 @@ def serve(path):
     else:
         return send_from_directory(app.static_folder, 'index.html')
 
+def init_db():
+    db = SQLAlchemy(app)
+    migrate = Migrate(app, db)
+    with app.app_context():
+        db.create_all()
+    return db, migrate 
+
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Get the Heroku-assigned port
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
+
+    # --- Initialize the database AFTER the app starts ---
+    db, migrate = init_db()
