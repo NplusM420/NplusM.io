@@ -8,7 +8,7 @@
   },
   "scripts": {
   "start": "node backend/app.js",
-  "heroku-postbuild": "cd frontend && ls && cat package.json && npm install --legacy-peer-deps && npm run build"
+  "heroku-postbuild": "pwd && ls -R && cd frontend && pwd && ls -R && npm install --legacy-peer-deps && npm run build"
 },
   "cacheDirectories": ["frontend/node_modules"]
 }
