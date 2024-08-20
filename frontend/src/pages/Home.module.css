@@ -1,0 +1,226 @@
+/* Home.module.css */
+
+.homeContainer {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #0a192f, #172a45);
+  color: #8892b0;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 60vh;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #64ffda;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.orbitalNav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.navItem {
+  color: #64ffda;
+  text-decoration: none;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  padding: 0.5rem 1rem;
+  border: 2px solid #64ffda;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.navItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(100, 255, 218, 0.2);
+  transition: all 0.3s ease;
+}
+
+.navItem:hover::before {
+  left: 0;
+}
+
+.navItem:hover {
+  background-color: rgba(100, 255, 218, 0.1);
+}
+
+.zoomArea {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 10;
+}
+
+.featuredProjects {
+  position: relative;
+  z-index: 20;
+  padding: 2rem;
+  background-color: rgba(23, 42, 69, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.projectCard {
+  background-color: #172a45;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+}
+
+.projectImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.projectInfo {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectInfo h3 {
+  margin-bottom: 0.5rem;
+  color: #e6f1ff;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+}
+
+.projectInfo p {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.projectLink {
+  align-self: flex-start;
+  background-color: #64ffda;
+  color: #0a192f;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+}
+
+.projectLink:hover {
+  background-color: #4fd1c5;
+}
+
+.textLabel {
+  color: #64ffda;
+  font-size: 14px;
+  padding: 2px 5px;
+  background-color: rgba(10, 25, 47, 0.7);
+  border-radius: 4px;
+  user-select: none;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 1rem;
+  }
+
+  .orbitalNav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navItem {
+    width: 80%;
+    max-width: 250px;
+    text-align: center;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .featuredProjects {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .projectGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectCard:hover {
+    transform: none;
+  }
+
+  .navItem::before {
+    display: none;
+  }
+}
+
+.fallbackContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+  background-color: #0a192f;
+  color: #64ffda;
+}

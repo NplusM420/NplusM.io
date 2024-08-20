@@ -1,0 +1,138 @@
+.projectManager {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.error {
+  color: #ff6b6b;
+  background-color: #ffeeee;
+  border: 1px solid #ff6b6b;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.loading {
+  color: #64ffda;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.projectCard {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input, .textarea, .select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #233554;
+  border: 1px solid #64ffda;
+  color: #ccd6f6;
+  border-radius: 4px;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.button {
+  background-color: #64ffda;
+  color: #0a192f;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #4fd1c5;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: #ccd6f6;
+}
+
+.checkboxLabel input {
+  margin-right: 0.5rem;
+}
+
+.projectImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.newProjectForm {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Styles for the ImageUpload component */
+.imageUpload {
+  margin-bottom: 1rem;
+}
+
+.imageUpload input[type="file"] {
+  display: none;
+}
+
+.imageUpload label {
+  background-color: #64ffda;
+  color: #0a192f;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.imagePreview {
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.uploadButton {
+  background-color: #64ffda;
+  color: #0a192f;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.uploadButton:hover {
+  background-color: #4fd1c5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+}

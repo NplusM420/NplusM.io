@@ -1,0 +1,78 @@
+.serviceManager {
+  padding: 20px;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.serviceCard {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  background-color: #233554;
+  border: 1px solid #64ffda;
+  color: #ccd6f6;
+}
+
+.textarea {
+  min-height: 100px;
+}
+
+.button {
+  background-color: #64ffda;
+  color: #0a192f;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.error {
+  color: #ff6b6b;
+  margin-bottom: 1rem 0;
+}
+
+.newProjectForm, .newServiceForm {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.newProjectForm .textarea, .newServiceForm .textarea {
+  grid-column: span 2;
+}
+
+.newProjectForm .button, .newServiceForm .button {
+  grid-column: span 2;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  color: #ccd6f6;
+}
+
+.checkboxLabel input {
+  margin-right: 10px;
+}
+
+.loading {
+  text-align: center;
+  color: #64ffda;
+  margin: 1rem 0;
+}

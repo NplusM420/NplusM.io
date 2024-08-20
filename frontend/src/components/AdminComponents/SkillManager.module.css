@@ -1,0 +1,62 @@
+.skillManager {
+  padding: 20px;
+}
+
+.skillGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.skillCard {
+  background-color: #172a45;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  background-color: #233554;
+  border: 1px solid #64ffda;
+  color: #ccd6f6;
+}
+
+.button {
+  background-color: #64ffda;
+  color: #0a192f;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.error {
+  color: #ff6b6b;
+  margin-bottom: 1rem 0;;
+}
+
+.newSkillForm {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.newSkillForm .input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.newSkillForm .button {
+  white-space: nowrap;
+}
+
+.loading {
+  text-align: center;
+  color: #64ffda;
+  margin: 1rem 0;
+}
