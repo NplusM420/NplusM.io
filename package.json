@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "node backend/app.js",
-    "heroku-postbuild": "npm install --legacy-peer-deps && npm run build",
+    "heroku-postbuild": "npm install && cd frontend && npm install && npm run build",
     "build": "cd frontend && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
