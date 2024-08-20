@@ -21,7 +21,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend/build', static_url_path='/') 
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = f"postgresql+psycopg2://{os.environ.get('DATABASE_URL').split('://')[1]}"
@@ -191,10 +191,14 @@ class AdminProfile(db.Model):
         }
 
 # Routes
-@app.route('/')
-def home():
-    logger.info("Request: GET /")
-    return "Welcome to NplusM.IO!"
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -563,14 +567,6 @@ def upload_service_image(service_id):
     
     logger.warning("File type not allowed")
     return jsonify({'error': 'File type not allowed'}), 400
-
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    if path != "" and os.path.exists(app.static_folder + '/' + path):
-        return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
