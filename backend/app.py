@@ -24,6 +24,8 @@ app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = f"postgresql+psycopg2://{os.environ.get('DATABASE_URL').split('://')[1]}"
+app.config['SQLALCHEMY_POOL_SIZE'] = int(os.environ.get('DB_POOL_SIZE', 5))
+app.config['SQLALCHEMY_MAX_OVERFLOW'] = int(os.environ.get('DB_MAX_OVERFLOW', 10))
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'your-secret-key')
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
