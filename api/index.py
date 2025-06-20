@@ -19,7 +19,8 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-# --- Configuration ---
+# --- App Initialization ---
+# Triggering new deployment with updated Vercel settings.
 # Build database URI from individual components
 db_user = os.getenv("DB_USER")
 db_password = os.getenv("DB_PASSWORD")
